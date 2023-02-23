@@ -119,7 +119,7 @@ export async function signIn(
 
 export async function toggleFavorite(parent, { id }, { models, user }) {
   if (!user) {
-    throw new GraphQLError('Please sign in.', {
+    throw new GraphQLError('You must be signed in to like the notes.', {
       extensions: { code: 'UNAUTHENTICATED', http: { status: 401 } }
     })
   }

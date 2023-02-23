@@ -3,10 +3,13 @@ import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import { GraphQLError } from 'graphql'
+import depthLimit from 'graphql-depth-limit'
+import { createComplexityLimitRule } from 'graphql-validation-complexity'
 import bodyparser from 'body-parser'
 const { json } = bodyparser
 import cors from 'cors'
 import http from 'http'
+import helmet from 'helmet'
 import * as dotenv from 'dotenv'
 dotenv.config()
 import { connect } from './db.js'
@@ -28,7 +31,7 @@ function getUser(token) {
     try {
       return verify(token, process.env.JWT_SECRET)
     } catch (e) {
-      throw new GraphQLError('Sessoin Invalid', {
+      throw new GraphQLError('Session Invalid', {
         extensions: {
           code: 'UNAUTHENTICATED',
           http: { status: 401 }
@@ -39,6 +42,9 @@ function getUser(token) {
 }
 
 const app = express()
+app.use(helmet())
+app.use(cors())
+
 // http server handles incoming request to our express app
 const httpServer = http.createServer(app)
 
@@ -46,6 +52,7 @@ const httpServer = http.createServer(app)
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  validationRules: [depthLimit(5), createComplexityLimitRule(1000)],
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
 })
 
@@ -54,7 +61,6 @@ await server.start()
 //應用Apollo GraphQL 中間件， 把路徑設爲/api
 app.use(
   '/api',
-  cors(),
   json(),
   expressMiddleware(server, {
     context: async ({ req }) => {

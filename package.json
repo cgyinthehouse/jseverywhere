@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js",
-    "dev": "nodemon --trace-warnings src/index.js",
+    "dev": "nodemon src/index.js",
     "final": "nodemon final/index.js",
     "seed": "node final/util/seed/index.js",
     "lint": "eslint \"src/**/*.js\""
@@ -34,7 +34,9 @@
     "express": "4.16.4",
     "express-session": "1.15.6",
     "graphql": "^16.6.0",
-    "helmet": "3.21.2",
+    "graphql-depth-limit": "^1.1.0",
+    "graphql-validation-complexity": "^0.4.2",
+    "helmet": "^6.0.1",
     "jsonwebtoken": "8.5.1",
     "marked": "0.7.0",
     "md5": "2.2.1",
