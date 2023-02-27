@@ -2,8 +2,8 @@ import { hash, compare } from 'bcrypt'
 import jwt from 'jsonwebtoken'
 const { sign } = jwt
 import { GraphQLError } from 'graphql'
-import dotenv from 'dotenv'
-dotenv.config()
+// import * as dotenv from 'dotenv'
+// dotenv.config()
 import gravatar from '../util/gravatar.js'
 import mongoose from 'mongoose'
 

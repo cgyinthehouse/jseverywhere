@@ -10,8 +10,8 @@ const { json } = bodyparser
 import cors from 'cors'
 import http from 'http'
 import helmet from 'helmet'
-import * as dotenv from 'dotenv'
-dotenv.config()
+// import * as dotenv from 'dotenv'
+// dotenv.config()
 import { connect } from './db.js'
 import models from './models/index.js'
 import typeDefs from './schema.js'
