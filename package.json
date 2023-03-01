@@ -8,7 +8,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "final": "nodemon final/index.js",
-    "seed": "node final/util/seed/index.js",
+    "seed": "node src/util/seed/index.js",
     "lint": "eslint \"src/**/*.js\""
   },
   "repository": {
@@ -46,8 +46,8 @@
     "passport-github2": "0.1.11"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/dotenv": "^8.2.0",
-    "faker": "4.1.0",
     "node-fetch": "2.5.0",
     "prettier": "^2.8.0"
   }

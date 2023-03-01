@@ -15,7 +15,7 @@ export async function me(_, __, { models, user }) {
 }
 export async function noteFeed(_, { cursor }, { models }) {
   // specifies the max number of documents the query returns
-  const limit = 3
+  const limit = 7
   let hasNextPage = false
   let cursorQuery = {}
   let newCursor = ''
